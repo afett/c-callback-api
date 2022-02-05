@@ -1,5 +1,5 @@
-CFLAGS=-g
-CXXFLAGS=-g
+CFLAGS=-g -Wall -Werror
+CXXFLAGS=-g -Wall -Werror
 
 test_foo: main.o foo-cc.o foo.o
 	$(CXX) -o $@ $^
