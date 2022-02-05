@@ -16,7 +16,11 @@ int main()
 	f.on_a_event([](int arg) { std::cerr << "on_a: " << arg << "\n"; });
 
 	auto b = Bar{};
-	f.on_b_event([&b](std::string const& arg) { b.say(arg); });
+	f.on_b_event("Hello", [&b](std::string const& arg) { b.say(arg); });
+
+	f.run();
+
+	f.on_b_event("Hi", [&b](std::string const& arg) { b.say(arg); });
 
 	f.run();
 }

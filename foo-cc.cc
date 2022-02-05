@@ -14,8 +14,8 @@ Foo::Foo()
 		throw std::bad_alloc();
 	}
 
+	// register in ctor as there are no side effects
 	foo_on_a_event(raw_.get(), &Foo::on_a_handler, this);
-	foo_on_b_event(raw_.get(), &Foo::on_b_handler, this);
 }
 
 Foo::~Foo() = default;
@@ -25,9 +25,12 @@ void Foo::on_a_event(std::function<void(int)> const& cb)
 	on_a_cb_ = cb;
 }
 
-void Foo::on_b_event(std::function<void(std::string const&)> const& cb)
+void Foo::on_b_event(std::string const& str, std::function<void(std::string const&)> const& cb)
 {
 	on_b_cb_ = cb;
+
+	// register on every call, as there are side effects - eg. replacing "str"
+	foo_on_b_event(raw_.get(), str.c_str(), &Foo::on_b_handler, this);
 }
 
 void Foo::on_a_handler(int arg, void *data)

@@ -15,7 +15,7 @@ public:
 	~Foo();
 
 	void on_a_event(std::function<void(int)> const&);
-	void on_b_event(std::function<void(std::string const&)> const&);
+	void on_b_event(std::string const&, std::function<void(std::string const&)> const&);
 	void run();
 
 private:

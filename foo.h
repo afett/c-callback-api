@@ -11,7 +11,7 @@ struct foo *foo_new();
 void foo_free(struct foo*);
 
 void foo_on_a_event(struct foo *, void(*)(int, void*), void*);
-void foo_on_b_event(struct foo *, void(*)(const char*, void*), void*);
+void foo_on_b_event(struct foo *, const char*, void(*)(const char*, void*), void*);
 
 void foo_run(struct foo*);
 
